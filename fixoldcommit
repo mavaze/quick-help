@@ -1,0 +1,23 @@
+function fixoldcommit() { 
+    if [[ -n $(git diff --name-only --cached) ]]; then
+        git cat-file -t ${1};
+        if [ $? -eq 0 ]; then
+            stashed=false;
+            if [[ -n $(git diff --name-only) ]]; then
+                git stash -k -q;
+                stashed=true;
+                echo "stashed files";
+            fi;
+            git commit --fixup=${1};
+            git rebase --interactive --autosquash ${1}^;
+            if test "$stashed" = true; then
+                git stash pop -q;
+                echo "unstashed files";
+            fi;
+        else
+            echo "Commit '${1}' does not exist";
+        fi;
+    else
+        echo "Files are not added";
+    fi
+}
