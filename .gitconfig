@@ -1,0 +1,27 @@
+[user]
+	email = mavaze@users.noreply.github.com
+	name = Mayuresh Vaze
+[init]
+	defaultBranch = main
+[alias]
+	co = checkout
+	br = branch
+	ci = commit -m
+	ri = rebase -i
+	st = status
+	cp = cherry-pick
+	unstage = reset HEAD --
+	force = push --force-with-lease
+	hard = reset --hard
+	soft = reset --soft
+	amd = ci --amend
+	amd- = amd --no-edit
+	pop = stash pop
+[core]
+	editor = vi
+[commit]
+	gpgsign = true
+[credential]
+	helper = store
+[includeIf "gitdir:~/personal/"]
+	path = ~/.gitconfig-personal
